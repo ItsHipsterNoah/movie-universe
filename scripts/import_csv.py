@@ -11,7 +11,9 @@ def process_number(integer) -> int:
         return integer
 
 def trunc(string):
-    return string[:50]
+    if len(string > 50):
+        return string[:45] + "..."
+    return string
 
 
 with open('files/movies.csv') as f:
@@ -27,8 +29,8 @@ with open('files/movies.csv') as f:
                 hulu = int(row[8]),
                 prime = int(row[9]),
                 disney = int(row[10]),
-                directors = row[12].replace(',', ', '),
-                genres = row[13].replace(',', ', '),
+                directors = trunc(row[12].replace(',', ', ')),
+                genres = trunc(row[13].replace(',', ', ')),
                 country = row[14],
                 language = row[15],
                 runtime = int(process_number(row[16]))
