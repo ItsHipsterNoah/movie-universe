@@ -2,9 +2,7 @@ from django.http.response import Http404, HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect, render
 from .models import Movie
 from sklearn.neighbors import NearestNeighbors
-import pandas as pd
 import django_pandas.io as djpd
-from random import shuffle
 
 def index(request):
     if 'recommednation' in request.session:
