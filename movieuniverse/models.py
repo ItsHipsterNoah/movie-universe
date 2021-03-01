@@ -9,7 +9,7 @@ AGE_OPTIONS = [
 ]
 
 class Movie(models.Model):
-    title = models.CharField(max_length=200)
+    title = models.CharField(max_length=50)
     year = models.CharField(max_length=4)
     age = models.CharField(max_length=4, choices=AGE_OPTIONS)
     IMDb_rating = models.FloatField()
