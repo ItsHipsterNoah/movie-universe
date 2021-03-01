@@ -7,7 +7,7 @@ import django_pandas.io as djpd
 from random import shuffle
 
 def index(request):
-    if request.session['recommendations']:
+    if 'recommednation' in request.session:
         recent_search = request.session['recommendations'][6:]
     results = Movie.objects.filter(id__in=recent_search)
     return render(request, 'movieuniverse/index.html', {
