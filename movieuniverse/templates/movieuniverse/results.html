@@ -1,0 +1,61 @@
+{% extends 'movieuniverse/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="query-container u-text-center">
+    <h1 class="query-heading">You searched for: <span class="query">{{ query }}</span></h1>
+</div>
+
+<div class="results-container">
+    {% if movies %}
+        {% for movie in movies %}
+        <div class="result-card">
+            <a href="{% url 'detail' movie.id %}">
+                <h1 class="movie-title">{{ movie.title }}</h1>
+                <p class="movie-year">{{ movie.year }}</p>
+                <p class="move-genres" >{{ movie.genres }}</p>
+            </a>
+        </div>
+        <br>
+        {% endfor %}
+{% else %}
+No results.
+{% endif %}
+</div>
+<br>
+
+<div class="u-text-center">
+    <h1 class="more-heading">More movies in <span style="font-weight: 400;">{{movies.0.genres}}</span> </h1>
+    <div class="results-container">
+        {% for more in more_movies %}
+        <div class="result-card">
+            <a href="{% url 'detail' more.id %}">
+                <h1 class="movie-title">{{ more.title }}</h1>
+                <p class="movie-year">{{ more.year }}</p>
+            </a>
+        </div>
+        <br>
+        {% endfor %}
+    </div>
+</div>
+
+<div class="u-text-center">
+    <h2 class="query-heading">Recommended Movies</h2>
+</div>
+<div class="results-container">
+    {% if recommendations %}
+        {% for r in recommendations %}
+        <a href="{% url 'detail' r %}">
+            <div class="result-card">
+                <h1 class="movie-title">{{ r }}</h1>
+            </div>
+        </a>
+        <br>
+        {% endfor %}
+    {% else %}
+   No recommendations.
+    {% endif %}
+    </div>
+
+
+{% endblock %}

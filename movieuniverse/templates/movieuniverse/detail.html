@@ -1,0 +1,74 @@
+{% extends 'movieuniverse/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="detail-container">
+    <h1 class="movie-header">{{ movie.title }}</h1>
+    <div class="detail-outer">
+        <div class="detail-inner">
+            <div class="movie-info">
+                <h2 class="detail-heading">{{ movie.year }}</h2>
+                <h2 class="detail-heading">Genre(s): {{ movie.genres }}</h2>
+                <h2 class="detail-heading">Director(s): {{ movie.directors }}</h2>
+                <h2 class="detail-heading">Age group: {{ movie.age }}</h2>
+                <h2 class="detail-heading">Language(s): {{ movie.language }}</h2>
+                <h2 class="detail-heading">Countries of Origin: {{ movie.country }}</h2>
+                {% if movie.runtime == '0' %}
+                    <h2 class="detail-heading">Runtime: Not available</h2>
+                {% else %}
+                    <h2 class="detail-heading">Runtime: {{ movie.runtime }} minutes</h2>
+                {% endif %}
+                
+                {% if movie.IMDb_rating == '0' %}
+                <h2 class="detail-heading">IMDb Rating: Not available</h2>
+                {% else %}
+                <h2 class="detail-heading">IMDb Rating: {{ movie.IMDb_rating }}</h2>                
+                {% endif %}
+
+                {% if movie.Rotten_Tomatoes_rating == '0' %}
+                    <h2 class="detail-heading">Rotten Tomatoes Rating: Not available</h2>
+                {% elif moive.Rotten_Tomaotes_rating < '60' %}
+                    <h2 style="display: inline-block;" class="detail-heading">Rotten Tomatoes Rating: {{ movie.Rotten_Tomatoes_rating }}%</h2>
+                    <img class="rt-rating" src="{% static 'movieuniverse/img/splat.png' %}">
+                {% else %}
+                    <h2 style="display: inline-block;" class="detail-heading">Rotten Tomatoes Rating: {{ movie.Rotten_Tomatoes_rating }}%</h2>
+                    <img class="rt-rating" src="{% static 'movieuniverse/img/fresh.png' %}">
+                {% endif %}
+            </div>
+        </div>
+        <div class="detail-inner">
+            <div class="u-text-center">
+                <h1 class="available">Available on</h1>
+            </div>
+            <div class="streaming-services">
+                {% if movie.netflix %}
+                <a href="https://www.netflix.com" target="_blank">
+                    <img class="provider-logo" src="{% static 'movieuniverse/img/netflix.png' %}" alt="Netflix Logo">
+                </a>
+                {% endif %}
+    
+                {% if movie.hulu %}
+                    <a href="https://www.hulu.com" target="_blank">
+                        <img class="provider-logo" src="{% static 'movieuniverse/img/hulu.png' %}" alt="Hulu Logo">
+                    </a>
+                {% endif %}
+    
+                {% if movie.disney %}
+                    <a href="https://www.disneyplus.com" target="_blank">
+                        <img class="provider-logo" src="{% static 'movieuniverse/img/disney.png' %}" alt="Disney Plus Logo">
+                    </a></a>
+                {% endif %}
+    
+                {% if movie.prime %}
+                    <a href="https://www.amazon.com/s?k={{movie.title}}" target="_blank">
+                        <img class="provider-logo" src="{% static 'movieuniverse/img/prime.png' %}" alt="Amazon Prime Video Logo">
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+{% endblock %}
