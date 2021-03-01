@@ -79,11 +79,16 @@ WSGI_APPLICATION = 'movie_universe.wsgi.application'
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': BASE_DIR / 'db.sqlite3',
+    # }
+
 }
+
+import dj_database_url
+
+DATABASES['default'] = dj_database_url.config(default='postgres://tkwhyxgkoarwuh:691d12b236119d5af511f03335226517de6093c049ba0eadaf0e12e0802347dc@ec2-3-95-85-91.compute-1.amazonaws.com:5432/d56n30bk42ujd5', conn_max_age=600, ssl_require=True)
 
 
 # Password validation
