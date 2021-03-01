@@ -10,13 +10,15 @@ def process_number(integer) -> int:
     else:
         return integer
 
+def trunc(string):
+    return string[:50]
 
 
 with open('files/movies.csv') as f:
         reader = csv.reader(f)
         for row in reader:
             _, created = Movie.objects.get_or_create(
-                title = row[2],
+                title = trunc(row[2]),
                 year = row[3],
                 age = row[4],
                 IMDb_rating = process_number(row[5]),
