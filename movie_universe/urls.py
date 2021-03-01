@@ -16,7 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from movieuniverse import views
-
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('', views.index, name='index'),
@@ -24,4 +25,4 @@ urlpatterns = [
     path('movie/<int:movie_id>/', views.detail, name='int_detail'),
     path('movie/<str:title>/', views.recommendation_detail, name='detail'),
     path('admin/', admin.site.urls), 
-]
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
