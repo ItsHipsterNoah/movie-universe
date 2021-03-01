@@ -11,7 +11,7 @@ def process_number(integer) -> int:
         return integer
 
 def trunc(string):
-    if len(string > 50):
+    if len(string) > 50:
         return string[:45] + "..."
     return string
 
