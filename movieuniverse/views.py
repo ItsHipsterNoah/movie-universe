@@ -23,6 +23,7 @@ def result(request):
 
     recommended_movies = ''
     recommendations = []
+    more_movies = []
     if search_query != '':
         results = Movie.objects.filter(title__contains=search_query)
         if netflix == 'on':
