@@ -25,7 +25,9 @@ def result(request):
     recommendations = []
     more_movies = []
     if search_query != '':
-        results = Movie.objects.filter(title__contains=search_query)
+        results = Movie.objects.filter(title__contains=search_query.capitalize())
+        results = results | Movie.objects.filter(directors__contains=search_query.capitalize())
+        results = results | Movie.objects.filter(genres__contains=search_query.capitalize())
         if netflix == 'on':
             results = results.filter(netflix__exact=1)
         elif hulu == 'on':

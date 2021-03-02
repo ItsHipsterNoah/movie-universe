@@ -20,7 +20,7 @@
                     <h2 class="detail-heading">Runtime: {{ movie.runtime }} minutes</h2>
                 {% endif %}
                 
-                {% if movie.IMDb_rating == '0' %}
+                {% if movie.IMDb_rating == '0.0' %}
                 <h2 class="detail-heading">IMDb Rating: Not available</h2>
                 {% else %}
                 <h2 class="detail-heading">IMDb Rating: {{ movie.IMDb_rating }}</h2>                
@@ -28,9 +28,9 @@
 
                 {% if movie.Rotten_Tomatoes_rating == '0' %}
                     <h2 class="detail-heading">Rotten Tomatoes Rating: Not available</h2>
-                {% elif moive.Rotten_Tomaotes_rating < '60' %}
+                {% elif movie.Rotten_Tomatoes_rating < 60 %}
                     <h2 style="display: inline-block;" class="detail-heading">Rotten Tomatoes Rating: {{ movie.Rotten_Tomatoes_rating }}%</h2>
-                    <img class="rt-rating" src="{% static 'movieuniverse/img/splat.png' %}">
+                    <img class="rt-rating" src="{% static 'movieuniverse/img/rotten.png' %}">
                 {% else %}
                     <h2 style="display: inline-block;" class="detail-heading">Rotten Tomatoes Rating: {{ movie.Rotten_Tomatoes_rating }}%</h2>
                     <img class="rt-rating" src="{% static 'movieuniverse/img/fresh.png' %}">
