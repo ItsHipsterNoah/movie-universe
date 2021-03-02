@@ -5,7 +5,7 @@ from sklearn.neighbors import NearestNeighbors
 import django_pandas.io as djpd
 
 def index(request):
-    if 'recommednation' in request.session:
+    if 'recommendations' in request.session:
         recent_search = request.session['recommendations'][6:]
     else:
         recent_search = []

@@ -25,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'x)ztd3_cq%p*-3aux77__$u8vs3ah*3u$9#3(egpitk)+(v7p%'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = [
     '*',
@@ -135,7 +135,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 django_heroku.settings(locals())
 
-SESSION_ENGINE= 'django.contrib.sessions.backends.file'
+SESSION_ENGINE= 'django.contrib.sessions.backends.cached_db'
 
 
 LOGGING = {
