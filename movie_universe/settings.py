@@ -135,7 +135,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 django_heroku.settings(locals())
 
-SESSION_ENGINE= 'django.contrib.sessions.backends.cached_db'
+SESSION_ENGINE= 'django.contrib.sessions.backends.file'
 
 
 LOGGING = {
