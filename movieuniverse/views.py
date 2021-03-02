@@ -63,3 +63,6 @@ def detail(request, movie_id):
 def recommendation_detail(request, title):
     movie_id = Movie.objects.get(title__exact=title).id
     return redirect(f'/movie/{movie_id}')
+
+def stats(request):
+    return render(request, 'movieuniverse/insights.html')

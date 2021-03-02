@@ -1,0 +1,15 @@
+{% extends 'movieuniverse/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="u-text-center">
+    <h1 class="insights-heading">Catalog of Movies by Year</h1>
+    <img class="insights-img" src="{% static 'movieuniverse/img/Years.png' %}" alt="">
+
+    <h1 class="insights-heading">Genres Count Totals</h1>
+    <img class="insights-img" src="{% static 'movieuniverse/img/Genres.png' %}" alt="">
+
+    <h1 class="insights-heading">Movie Count by Streaming Provider</h1>
+    <img class="insights-img" src="{% static 'movieuniverse/img/MovieCount.png' %}" alt="">
+</div>
+{% endblock %}
