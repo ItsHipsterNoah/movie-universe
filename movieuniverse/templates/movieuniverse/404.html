@@ -1,0 +1,12 @@
+{% extends 'movieuniverse/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="u-center u-text-center">
+    <h1 class="heading-404">404</h1>
+    <p>The page you were looking for can't be found.</p>
+    <a href="{% url 'index' %}">Go back home</a>
+</div>
+
+{% endblock %}

@@ -27,3 +27,5 @@ urlpatterns = [
     path('insights/', views.stats, name='stats'),
     path('admin/', admin.site.urls), 
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+handler404 = 'movieuniverse.views.handle404'

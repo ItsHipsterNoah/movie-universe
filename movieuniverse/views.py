@@ -1,4 +1,4 @@
-from django.http.response import Http404, HttpResponse, HttpResponseRedirect
+from django.http.response import Http404, HttpResponse, HttpResponseNotFound, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect, render
 from .models import Movie
 from sklearn.neighbors import NearestNeighbors
@@ -66,3 +66,6 @@ def recommendation_detail(request, title):
 
 def stats(request):
     return render(request, 'movieuniverse/insights.html')
+
+def handle404(request, exception):
+    return render(request, 'movieuniverse/404.html', status=404)

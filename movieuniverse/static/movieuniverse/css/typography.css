@@ -38,3 +38,8 @@
     font-weight: 200;
     text-transform: lowercase;
 }
+
+.heading-404 {
+    font-size: 50px;
+    margin: 10px;
+}
