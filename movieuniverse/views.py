@@ -43,6 +43,7 @@ def result(request):
                 for r_movie in recommended_movies[:6]: 
                     recommendations.extend(df.iloc[r_movie-1]['title'].values.tolist())
                 request.session['recommendations'] = recommended_movies.tolist()[0]
+                request.session.modified = True
             more_movies = Movie.objects.filter(genres__exact=results[0].genres).order_by('?')
         return render(request, 'movieuniverse/results.html', { 
             "query" : search_query,
