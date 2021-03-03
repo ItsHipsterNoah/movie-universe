@@ -241,6 +241,7 @@ body {
 
 .insights-heading {
     margin: 20px;
+    font-weight: 100;
 }
 
 .insights-img {
@@ -253,8 +254,6 @@ body {
 .insights-img:hover {
     box-shadow: 0 0 1rem 0 rgba(12, 12, 12, 0.5);
 }
-
-
 
 
 @media only screen and (max-width: 700px) {
