@@ -25,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'x)ztd3_cq%p*-3aux77__$u8vs3ah*3u$9#3(egpitk)+(v7p%'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = [
     '.herokuapp.com',
@@ -75,20 +75,35 @@ TEMPLATES = [
 WSGI_APPLICATION = 'movie_universe.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/3.1/ref/settings/#databases
-
 DATABASES = {
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.sqlite3',
-    #     'NAME': BASE_DIR / 'db.sqlite3',
-    # }
-
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.environ.get('DATABASE_NAME'),
+        'USER': os.environ.get('DATABASE_USER'),
+        'PASSWORD': os.environ.get('DATABASE_PASSWORD'),
+        'HOST': os.environ.get('DATABASE_HOST'),
+        'PORT': '5432'
+    }
 }
 
 import dj_database_url
+db_from_env = dj_database_url.config(conn_max_age=600)
+DATABASES['default'].update(db_from_env)
 
-DATABASES['default'] = dj_database_url.config(default='postgres://tkwhyxgkoarwuh:691d12b236119d5af511f03335226517de6093c049ba0eadaf0e12e0802347dc@ec2-3-95-85-91.compute-1.amazonaws.com:5432/d56n30bk42ujd5', conn_max_age=600, ssl_require=True)
+# Database
+# https://docs.djangoproject.com/en/3.1/ref/settings/#databases
+
+# DATABASES = {
+#     # 'default': {
+#     #     'ENGINE': 'django.db.backends.sqlite3',
+#     #     'NAME': BASE_DIR / 'db.sqlite3',
+#     # }
+
+# }
+
+# import dj_database_url
+
+# DATABASES['default'] = dj_database_url.config(default='postgres://tkwhyxgkoarwuh:691d12b236119d5af511f03335226517de6093c049ba0eadaf0e12e0802347dc@ec2-3-95-85-91.compute-1.amazonaws.com:5432/d56n30bk42ujd5', conn_max_age=600, ssl_require=True)
 
 
 # Password validation

@@ -14,13 +14,13 @@
                 <h2 class="detail-heading">Age group: {{ movie.age }}</h2>
                 <h2 class="detail-heading">Language(s): {{ movie.language }}</h2>
                 <h2 class="detail-heading">Countries of Origin: {{ movie.country }}</h2>
-                {% if movie.runtime == '0' %}
+                {% if movie.runtime == 0 %}
                     <h2 class="detail-heading">Runtime: Not available</h2>
                 {% else %}
                     <h2 class="detail-heading">Runtime: {{ movie.runtime }} minutes</h2>
                 {% endif %}
                 
-                {% if movie.IMDb_rating == '0.0' %}
+                {% if movie.IMDb_rating == 0.0 %}
                 <h2 class="detail-heading">IMDb Rating: Not available</h2>
                 {% else %}
                 <h2 class="detail-heading">IMDb Rating: {{ movie.IMDb_rating }}</h2>                

@@ -42,7 +42,7 @@ def result(request):
             results = results.filter(prime__exact=1)
         if results:
             for result in results:
-                df = djpd.read_frame(Movie.objects.all())
+                df = djpd.read_frame(Movie.objects.all().defer('title', 'age', 'directors', 'genres', 'country', 'language', 'runtime'))
                 X = df[['year', 'IMDb_rating', 'Rotten_Tomatoes_rating']].dropna().values
                 nbrs = NearestNeighbors(n_neighbors=10).fit(X)
                 recommended_movies = nbrs.kneighbors([[result.year, result.IMDb_rating, result.Rotten_Tomatoes_rating]])[1]

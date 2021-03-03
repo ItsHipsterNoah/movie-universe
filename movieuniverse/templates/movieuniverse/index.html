@@ -2,26 +2,29 @@
 {% load static %}
 
 {% block content %}
-<div class="movie-form">
-    <h1 class="title"><span style="font-weight: 300;">Movie</span>Universe</h1>
-    <form action="{% url 'result' %}">
-        <input type="search" name="search" class="search-box" autocomplete="off">
-        <h2 class="platform">Platform:</h2>
-        <div class="options">
-            <input type="checkbox" name="netflix" class="checkbox"><span class="choice">Netflix</span>
-            <input type="checkbox" name="hulu" class="checkbox"><span class="choice">Hulu</span>
-            <input type="checkbox" name="disney" class="checkbox"><span class="choice">Disney+</span>
-            <input type="checkbox" name="prime" class="checkbox"><span class="choice">Amazon Prime</span>
-        </div>
-        <br>
-        <input type="submit" value="Search" class="search-btn">
-    </form>
-    {% if results %}
+<!--TODO: Add loading screen with javascript-->
+
+<div class="loading-wrapper">
+    <div class="movie-form">
+        <h1 class="title"><span style="font-weight: 300;">Movie</span>Universe</h1>
+        <form action="{% url 'result' %}" onsubmit="load()">
+            <input type="search" name="search" class="search-box" autocomplete="off">
+            <h2 class="platform">Platform:</h2>
+            <div class="options">
+                <input type="checkbox" name="netflix" class="checkbox"><span class="choice">Netflix</span>
+                <input type="checkbox" name="hulu" class="checkbox"><span class="choice">Hulu</span>
+                <input type="checkbox" name="disney" class="checkbox"><span class="choice">Disney+</span>
+                <input type="checkbox" name="prime" class="checkbox"><span class="choice">Amazon Prime</span>
+            </div>
+            <br>
+            <input type="submit" value="Search" class="search-btn">
+        </form>
+        {% if results %}
         <h3 class="scroll-down-text">Scroll down for recommendations</h3>
-    {% endif %}
-</div>
-<div class="recommended u-text-center">
-    {% if results %}
+        {% endif %}
+    </div>
+    <div class="recommended u-text-center">
+        {% if results %}
         <h3 class="title-recommended">Recommended For You</h3>
         <div class="recommendations-container">
             {% for result in results %}
@@ -32,8 +35,9 @@
             </a>
             {% endfor %}
         </div>
-    {% else %}
+        {% else %}
         <p>No recommendations available</p>
-    {% endif %}
+        {% endif %}
+    </div>
 </div>
 {% endblock %}
