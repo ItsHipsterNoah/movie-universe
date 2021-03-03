@@ -3,6 +3,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from .models import Movie
 from sklearn.neighbors import NearestNeighbors
 import django_pandas.io as djpd
+from titlecase import titlecase
 
 def index(request):
     if 'recommendations' in request.session:
@@ -20,14 +21,17 @@ def result(request):
     hulu = request.GET.get('hulu')
     disney = request.GET.get('disney')
     prime = request.GET.get('prime')
-
+    if "," in search_query:
+        search_query = search_query.split(', ')
+        search_query = [word.capitalize() for word in search_query]
+        search_query = ', '.join(search_query) 
     recommended_movies = ''
     recommendations = []
     more_movies = []
     if search_query != '':
-        results = Movie.objects.filter(title__contains=search_query.capitalize())
-        results = results | Movie.objects.filter(directors__contains=search_query.capitalize())
-        results = results | Movie.objects.filter(genres__contains=search_query.capitalize())
+        results = Movie.objects.filter(title__contains=titlecase(search_query)) | Movie.objects.filter(title__exact=titlecase(search_query))
+        results = results | Movie.objects.filter(directors__contains=titlecase(search_query)) | Movie.objects.filter(directors__exact=titlecase(search_query))
+        results = results | Movie.objects.filter(genres__contains=titlecase(search_query)) | Movie.objects.filter(genres__exact=titlecase(search_query))
         if netflix == 'on':
             results = results.filter(netflix__exact=1)
         elif hulu == 'on':
@@ -46,12 +50,12 @@ def result(request):
                     recommendations.extend(df.iloc[r_movie-1]['title'].values.tolist())
                 request.session['recommendations'] = recommended_movies.tolist()[0]
                 request.session.modified = True
-            more_movies = Movie.objects.filter(genres__exact=results[0].genres).order_by('?')
+            more_movies = Movie.objects.filter(genres__exact=results[0].genres).order_by('?')[:3]
         return render(request, 'movieuniverse/results.html', { 
             "query" : search_query,
             "movies" : results,
             "recommendations" : recommendations[:6],
-            "more_movies" : more_movies[:3]
+            "more_movies" : more_movies
         })
     else:
         return index(request)

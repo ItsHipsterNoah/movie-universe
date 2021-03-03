@@ -28,12 +28,12 @@ No results.
     <h1 class="more-heading">More movies in <span style="font-weight: 400;">{{movies.first.genres}}</span> </h1>
     <div class="results-container">
         {% for more in more_movies %}
-        <div class="result-card">
-            <a href="{% url 'detail' more.id %}">
+        <a href="{% url 'detail' more.id %}">
+            <div class="result-card">
                 <h1 class="movie-title">{{ more.title }}</h1>
                 <p class="movie-year">{{ more.year }}</p>
-            </a>
-        </div>
+            </div>
+        </a>
         <br>
         {% endfor %}
     </div>
