@@ -26,16 +26,16 @@
                 <h2 class="detail-heading">IMDb Rating: {{ movie.IMDb_rating }}</h2>                
                 {% endif %}
 
-                {% if movie.Rotten_Tomatoes_rating == '0' %}
+                {% if movie.Rotten_Tomatoes_rating == 0 %}
                     <h2 class="detail-heading">Rotten Tomatoes Rating: Not available</h2>
-                {% elif movie.Rotten_Tomatoes_rating < '60' %}
-                    <h2 style="display: inline-block;" class="detail-heading">Rotten Tomatoes Rating: {{ movie.Rotten_Tomatoes_rating }}%</h2>
+                {% elif movie.Rotten_Tomatoes_rating < 60 %}
+                    <h2 style="display: inline-block;" class="detail-heading">Rotten Tomatoes Rating: {{ movie.Rotten_Tomatoes_rating }} %</h2>
                     <img class="rt-rating" src="{% static 'movieuniverse/img/rotten.png' %}">
                 {% elif movie.Rotten_Tomatoes_rating == 100 %}
-                    <h2 style="display: inline-block;" class="detail-heading">Rotten Tomatoes Rating: {{ movie.Rotten_Tomatoes_rating }}%</h2>
+                    <h2 style="display: inline-block;" class="detail-heading">Rotten Tomatoes Rating: {{ movie.Rotten_Tomatoes_rating }} %</h2>
                     <img class="rt-rating" src="{% static 'movieuniverse/img/fresh.png' %}">
                 {% else %}
-                    <h2 style="display: inline-block;" class="detail-heading">Rotten Tomatoes Rating: {{ movie.Rotten_Tomatoes_rating }}%</h2>
+                    <h2 style="display: inline-block;" class="detail-heading">Rotten Tomatoes Rating: {{ movie.Rotten_Tomatoes_rating }} %</h2>
                     <img class="rt-rating" src="{% static 'movieuniverse/img/fresh.png' %}">
                 {% endif %}
             </div>
