@@ -77,7 +77,7 @@ WSGI_APPLICATION = 'movie_universe.wsgi.application'
 
 
 DATABASES = {
-    'default-1': {
+    'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': os.environ.get('DATABASE_NAME'),
         'USER': os.environ.get('DATABASE_USER'),
@@ -85,7 +85,7 @@ DATABASES = {
         'HOST': os.environ.get('DATABASE_HOST'),
         'PORT': '5432',
     },
-    'default': {
+    'test': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'mu-db-test',
         'USER': 'thomp',
