@@ -3,6 +3,7 @@ from .models import Movie
 from sklearn.neighbors import NearestNeighbors
 import django_pandas.io as djpd
 from titlecase import titlecase
+from django.core.paginator import Paginator
 
 
 def index(request):
@@ -22,14 +23,14 @@ def result(request):
     hulu = request.GET.get('hulu')
     disney = request.GET.get('disney')
     prime = request.GET.get('prime')
-    if "," in search_query:
-        search_query = search_query.split(', ')
-        search_query = [word.capitalize() for word in search_query]
-        search_query = ', '.join(search_query) 
     recommended_movies = ''
     recommendations = []
     more_movies = []
-    if search_query != '':
+    if search_query:
+        if "," in search_query:
+            search_query = search_query.split(', ')
+            search_query = [word.capitalize() for word in search_query]
+            search_query = ', '.join(search_query) 
         results = Movie.objects.filter(title__contains=titlecase(search_query)) | Movie.objects.filter(title__exact=titlecase(search_query))
         results = results | Movie.objects.filter(directors__contains=titlecase(search_query)) | Movie.objects.filter(directors__exact=titlecase(search_query))
         results = results | Movie.objects.filter(genres__contains=titlecase(search_query)) | Movie.objects.filter(genres__exact=titlecase(search_query))
@@ -52,11 +53,18 @@ def result(request):
                 request.session['recommendations'] = recommended_movies.tolist()[0]
                 request.session.modified = True
             more_movies = Movie.objects.filter(genres__exact=results[0].genres).order_by('?')[:3]
+            paginator = Paginator(results, 6)
+            page_number = request.GET.get('page')
+            paginated_movies = paginator.get_page(page_number)
         return render(request, 'movieuniverse/results.html', { 
             "query" : search_query,
-            "movies" : results,
+            "movies" : paginated_movies,
             "recommendations" : recommendations[:6],
-            "more_movies" : more_movies
+            "more_movies" : more_movies,
+            "netflix" : netflix,
+            "hulu" : hulu,
+            "disney" : disney,
+            "prime" : prime
         })
     else:
         return index(request)

@@ -8,26 +8,39 @@
 
 <div class="results-container">
     {% if movies %}
-        {% for movie in movies %}
-        <div class="result-card">
-            <a href="{% url 'detail' movie.id %}">
-                <h1 class="movie-title">{{ movie.title }}</h1>
-                <p class="movie-year">{{ movie.year }}</p>
-                <p class="move-genres" >{{ movie.genres }}</p>
-            </a>
-        </div>
-        <br>
-        {% endfor %}
-{% else %}
-No results.
-{% endif %}
+    {% for movie in movies %}
+    <div class="result-card">
+        <a href="{% url 'detail' movie.id %}">
+            <h1 class="movie-title">{{ movie.title }}</h1>
+            <p class="movie-year">{{ movie.year }}</p>
+            <p class="move-genres">{{ movie.genres }}</p>
+        </a>
+    </div>
+    <br>
+    {% endfor %}
+    {% else %}
+    No results.
+    {% endif %}
 </div>
 <br>
-
-
+<div class="u-text-center">
+    <div class="pagination">
+        <span class="step-links">
+            {% if movies.has_previous %}
+            <a class="step-link" href="?search={{query}}&netflix={{netflix}}&hulu={{hulu}}&disney={{disney}}&prime={{prime}}&page={{ movies.previous_page_number }}">previous</a>
+            {% endif %}
+            <span class="current">
+                {{ movies.number }}
+            </span>
+            {% if movies.has_next %}
+            <a class="step-link" href="?search={{query}}&netflix={{netflix}}&hulu={{hulu}}&disney={{disney}}&prime={{prime}}&page={{ movies.next_page_number }}">next</a>
+            {% endif %}
+        </span>
+    </div>
+</div>
 <div class="u-text-center">
     {% if more_movies %}
-    <h1 class="more-heading">More movies in <span style="font-weight: 400;">{{movies.first.genres}}</span> </h1>
+    <h1 class="more-heading">More movies in <span style="font-weight: 400;">{{more_movies.first.genres}}</span> </h1>
     {% endif %}
     <div class="results-container">
         {% for more in more_movies %}
@@ -48,18 +61,18 @@ No results.
 </div>
 <div class="results-container">
     {% if recommendations %}
-        {% for r in recommendations %}
-        <a href="{% url 'detail' r %}">
-            <div class="result-card">
-                <h1 class="movie-title">{{ r }}</h1>
-            </div>
-        </a>
-        <br>
-        {% endfor %}
+    {% for r in recommendations %}
+    <a href="{% url 'detail' r %}">
+        <div class="result-card">
+            <h1 class="movie-title">{{ r }}</h1>
+        </div>
+    </a>
+    <br>
+    {% endfor %}
     {% else %}
-   No recommendations.
+    No recommendations.
     {% endif %}
-    </div>
+</div>
 
 
 {% endblock %}

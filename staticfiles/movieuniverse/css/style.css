@@ -54,12 +54,23 @@ body {
     border: none;
 }
 
+::placeholder {
+    opacity: 0;
+    transition: all 1s;
+}
+
+
 .search-box:focus {
     background-color: rgba(255, 255, 255, 0.5);
     border: 1px solid #fff;
     padding: 10px;
     outline: none;
     box-shadow: 0 0 1rem 0 rgba(0, 0, 0, .2); 
+}
+
+.search-box:focus::placeholder {
+    color:#fff;
+    opacity: 1;
 }
 
 .options {
@@ -131,13 +142,12 @@ body {
     color: #fff;
     cursor: pointer;
     outline: none;
+    transition: all 1s;
 }
 
 .search-btn:hover {
-    color: transparent;
     background-color: #fff;
-    background-clip: text;
-    -webkit-background-clip: text;
+    color: rgba(253,29,29,1);
 }
 
 /* Results styles */
@@ -256,6 +266,16 @@ body {
     box-shadow: 0 0 1rem 0 rgba(12, 12, 12, 0.5);
 }
 
+
+.loading-wrapper {
+    height: 150vh;
+}
+
+/* Pagination styles */
+
+.pagination {
+    padding: 20px;
+}
 
 @media only screen and (max-width: 700px) {
     .recommendations-container {
