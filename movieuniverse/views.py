@@ -70,6 +70,10 @@ def result(request):
             return  render(request, 'movieuniverse/results.html', {
                 "query" : search_query,
             })
+    else:
+        return  render(request, 'movieuniverse/results.html', {
+                "query" : search_query,
+            })
 
 def detail(request, movie_id):
     movie = get_object_or_404(Movie, pk=movie_id)
