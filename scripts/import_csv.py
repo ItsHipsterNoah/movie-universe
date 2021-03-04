@@ -32,6 +32,6 @@ with open('files/movies.csv') as f:
                 directors = trunc(row[12].replace(',', ', ')),
                 genres = trunc(row[13].replace(',', ', ')),
                 country = row[14],
-                language = row[15],
+                language = trunc(row[15].replace(',', ', '),
                 runtime = int(process_number(row[16]))
             )
