@@ -1,9 +1,9 @@
-from django.http.response import Http404, HttpResponse, HttpResponseNotFound, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect, render
 from .models import Movie
 from sklearn.neighbors import NearestNeighbors
 import django_pandas.io as djpd
 from titlecase import titlecase
+
 
 def index(request):
     if 'recommendations' in request.session:
@@ -14,6 +14,7 @@ def index(request):
     return render(request, 'movieuniverse/index.html', {
         'results' : results
     })
+
 
 def result(request):
     search_query = request.GET.get('search')

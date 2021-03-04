@@ -54,12 +54,23 @@ body {
     border: none;
 }
 
+::placeholder {
+    opacity: 0;
+    transition: all 1s;
+}
+
+
 .search-box:focus {
     background-color: rgba(255, 255, 255, 0.5);
     border: 1px solid #fff;
     padding: 10px;
     outline: none;
     box-shadow: 0 0 1rem 0 rgba(0, 0, 0, .2); 
+}
+
+.search-box:focus::placeholder {
+    color:#fff;
+    opacity: 1;
 }
 
 .options {

@@ -1,7 +1,5 @@
 let checkboxes = document.querySelectorAll('.checkbox');
 let searchBtn = document.querySelector('.search-btn');
-let wrapper = document.querySelector('.loading-wrapper');
-
 
 if (searchBtn) {
     searchBtn.addEventListener('click', function(e) {
@@ -12,10 +10,6 @@ if (searchBtn) {
     });
 }
 
-const load = () =>
-{
-    wrapper.innerHTML = "Loading..."
-}
 
 const checkCheckBoxes = () => {
     checks = 0
@@ -27,7 +21,5 @@ const checkCheckBoxes = () => {
     if (checks == 0){
         return true;
     }
-    else {
-        return false;
-    }
+    return false;
 }
