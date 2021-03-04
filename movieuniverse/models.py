@@ -11,7 +11,7 @@ AGE_OPTIONS = [
 
 class Movie(models.Model):
     title = models.TextField(max_length=50)
-    year = models.TextField(max_length=4)
+    year = models.TextField(max_length=4) 
     age = models.TextField(max_length=4, choices=AGE_OPTIONS)
     IMDb_rating = models.FloatField()
     Rotten_Tomatoes_rating = models.IntegerField()

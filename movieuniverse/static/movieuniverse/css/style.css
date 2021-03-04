@@ -131,13 +131,12 @@ body {
     color: #fff;
     cursor: pointer;
     outline: none;
+    transition: all 1s;
 }
 
 .search-btn:hover {
-    color: transparent;
     background-color: #fff;
-    background-clip: text;
-    -webkit-background-clip: text;
+    color: rgba(253,29,29,1);
 }
 
 /* Results styles */

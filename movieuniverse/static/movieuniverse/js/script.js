@@ -12,10 +12,10 @@ if (searchBtn) {
     });
 }
 
-// const load = () =>
-// {
-//     wrapper.innerHTML = "Loading..."
-// }
+const load = () =>
+{
+    wrapper.innerHTML = "Loading..."
+}
 
 const checkCheckBoxes = () => {
     checks = 0

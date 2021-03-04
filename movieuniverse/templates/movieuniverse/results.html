@@ -24,8 +24,11 @@ No results.
 </div>
 <br>
 
+
 <div class="u-text-center">
+    {% if more_movies %}
     <h1 class="more-heading">More movies in <span style="font-weight: 400;">{{movies.first.genres}}</span> </h1>
+    {% endif %}
     <div class="results-container">
         {% for more in more_movies %}
         <a href="{% url 'detail' more.id %}">
@@ -38,6 +41,7 @@ No results.
         {% endfor %}
     </div>
 </div>
+
 
 <div class="u-text-center">
     <h2 class="query-heading">Recommended Movies</h2>
