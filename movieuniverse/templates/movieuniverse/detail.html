@@ -46,7 +46,7 @@
             </div>
             <div class="streaming-services">
                 {% if movie.netflix %}
-                <a href="https://www.netflix.com" target="_blank">
+                <a href="https://www.netflix.com/search?q={{movie.title}}" target="_blank">
                     <img class="provider-logo" src="{% static 'movieuniverse/img/netflix.png' %}" alt="Netflix Logo">
                 </a>
                 {% endif %}

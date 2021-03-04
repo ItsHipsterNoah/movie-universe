@@ -18,7 +18,7 @@ def index(request):
 
 
 def result(request):
-    search_query = request.GET.get('search')
+    search_query = request.GET.get('search').strip()
     netflix = request.GET.get('netflix')
     hulu = request.GET.get('hulu')
     disney = request.GET.get('disney')
@@ -56,18 +56,20 @@ def result(request):
             paginator = Paginator(results, 6)
             page_number = request.GET.get('page')
             paginated_movies = paginator.get_page(page_number)
-        return render(request, 'movieuniverse/results.html', { 
-            "query" : search_query,
-            "movies" : paginated_movies,
-            "recommendations" : recommendations[:6],
-            "more_movies" : more_movies,
-            "netflix" : netflix,
-            "hulu" : hulu,
-            "disney" : disney,
-            "prime" : prime
-        })
-    else:
-        return index(request)
+            return render(request, 'movieuniverse/results.html', { 
+                "query" : search_query,
+                "movies" : paginated_movies,
+                "recommendations" : recommendations[:6],
+                "more_movies" : more_movies,
+                "netflix" : netflix,
+                "hulu" : hulu,
+                "disney" : disney,
+                "prime" : prime
+            })
+        else:
+            return  render(request, 'movieuniverse/results.html', {
+                "query" : search_query,
+            })
 
 def detail(request, movie_id):
     movie = get_object_or_404(Movie, pk=movie_id)

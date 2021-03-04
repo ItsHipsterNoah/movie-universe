@@ -1,5 +1,4 @@
 import csv
-import os
 from movieuniverse.models import Movie
 
 def process_number(integer) -> int:
@@ -31,7 +30,7 @@ with open('files/movies.csv') as f:
                 disney = int(row[10]),
                 directors = trunc(row[12].replace(',', ', ')),
                 genres = trunc(row[13].replace(',', ', ')),
-                country = row[14],
+                country = trunc(row[13].replace(',', ', ')),
                 language = trunc(row[15].replace(',', ', ')),
                 runtime = int(process_number(row[16]))
             )
