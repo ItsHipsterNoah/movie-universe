@@ -1,6 +1,5 @@
 from django.db import models
 
-
 AGE_OPTIONS = [
     ('7+', '7+'),
     ('13+', '13+'),
@@ -27,6 +26,22 @@ class Movie(models.Model):
 
     def __str__(self) -> str:
         return self.title
+
+class TVShow(models.Model):
+    title = models.TextField(max_length=50)
+    year = models.TextField(max_length=4) 
+    age = models.TextField(max_length=4, choices=AGE_OPTIONS)
+    IMDb_rating = models.FloatField()
+    Rotten_Tomatoes_rating = models.IntegerField()
+    netflix = models.IntegerField(help_text='1 for available, 0 for not available')
+    hulu = models.IntegerField(help_text='1 for available, 0 for not available')
+    prime = models.IntegerField(help_text='1 for available, 0 for not available')
+    disney = models.IntegerField(help_text='1 for available, 0 for not available')
+
+    def __str__(self) -> str:
+        return self.title
+
+
 
 
 
