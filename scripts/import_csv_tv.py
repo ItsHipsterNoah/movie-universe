@@ -1,11 +1,6 @@
 import csv
 from movieuniverse.models import TVShow
 
-def process_number(integer):
-    if '%' in integer:
-        return float(integer.replace('%', ''))
-    else:
-        return float(integer)
 
 with open('files/movies.csv') as f:
         reader = csv.reader(f)
@@ -14,8 +9,8 @@ with open('files/movies.csv') as f:
                 title = row[1],
                 year = row[2],
                 age = row[3],
-                IMDb_rating = process_number(row[4]),
-                Rotten_Tomatoes_rating = float(process_number(row[5])),
+                IMDb_rating = row[4],
+                Rotten_Tomatoes_rating = row[5],
                 netflix = int(row[6]),
                 hulu = int(row[7]),
                 prime = int(row[8]),
