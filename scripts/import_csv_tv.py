@@ -2,9 +2,7 @@ import csv
 from movieuniverse.models import TVShow
 
 def process_number(integer):
-    if type(integer) == type(''):
-        return integer
-    elif '%' in integer:
+    if '%' in integer:
         return float(integer.replace('%', ''))
     else:
         return float(integer)
