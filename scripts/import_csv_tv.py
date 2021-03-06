@@ -1,6 +1,13 @@
 import csv
 from movieuniverse.models import TVShow
-from .import_csv import process_number
+
+def process_number(integer) -> int:
+    if integer == '':
+        return 0.0
+    elif '%' in integer:
+        return float(integer.replace('%', ''))
+    else:
+        return integer
 
 with open('files/movies.csv') as f:
         reader = csv.reader(f)
