@@ -17,6 +17,9 @@ def index(request):
     })
 
 
+
+
+
 def result(request):
     search_query = request.GET.get('search').strip()
     netflix = request.GET.get('netflix')
