@@ -25,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'x)ztd3_cq%p*-3aux77__$u8vs3ah*3u$9#3(egpitk)+(v7p%'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = [
     '.herokuapp.com',
@@ -77,7 +77,7 @@ WSGI_APPLICATION = 'movie_universe.wsgi.application'
 
 
 DATABASES = {
-    'default': {
+    'default-1': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': os.environ.get('DATABASE_NAME'),
         'USER': os.environ.get('DATABASE_USER'),
@@ -85,7 +85,7 @@ DATABASES = {
         'HOST': os.environ.get('DATABASE_HOST'),
         'PORT': '5432',
     },
-    'test': {
+    'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'mu-db-test',
         'USER': 'thomp',
@@ -95,9 +95,9 @@ DATABASES = {
     },
 }
 
-import dj_database_url
-db_from_env = dj_database_url.config(conn_max_age=600)
-DATABASES['default'].update(db_from_env)
+# import dj_database_url
+# db_from_env = dj_database_url.config(conn_max_age=600)
+# DATABASES['default'].update(db_from_env)
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
@@ -147,6 +147,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 django_heroku.settings(locals())
 
 SESSION_ENGINE= 'django.contrib.sessions.backends.cached_db'
+
+
 
 # LOGGING = {
 #     'version': 1,

@@ -1,5 +1,5 @@
 from django.shortcuts import get_object_or_404, redirect, render
-from .models import Movie
+from .models import Movie, TVShow
 from sklearn.neighbors import NearestNeighbors
 import django_pandas.io as djpd
 from titlecase import titlecase
@@ -15,9 +15,6 @@ def index(request):
     return render(request, 'movieuniverse/index.html', {
         'results' : results
     })
-
-
-
 
 
 def result(request):
@@ -45,10 +42,19 @@ def result(request):
             results = results.filter(disney__exact=1)
         elif prime == 'on':
             results = results.filter(prime__exact=1)
+        tv_results = TVShow.objects.filter(title__contains=titlecase(search_query)) | TVShow.objects.filter(title__exact=titlecase(search_query))
+        if netflix == 'on':
+            tv_results = tv_results.filter(netflix__exact=1)
+        elif hulu == 'on':
+            tv_results = tv_results.filter(hulu__exact=1)
+        elif disney == 'on':
+            tv_results = tv_results.filter(disney__exact=1)
+        elif prime == 'on':
+            tv_results = tv_results.filter(prime__exact=1)
         if results:
             for result in results:
                 df = djpd.read_frame(Movie.objects.all().defer('title', 'age', 'directors', 'genres', 'country', 'language', 'runtime'))
-                X = df[['year', 'IMDb_rating', 'Rotten_Tomatoes_rating']].dropna().values
+                X = df[[ 'year', 'IMDb_rating', 'Rotten_Tomatoes_rating']].dropna().values
                 nbrs = NearestNeighbors(n_neighbors=10).fit(X)
                 recommended_movies = nbrs.kneighbors([[result.year, result.IMDb_rating, result.Rotten_Tomatoes_rating]])[1]
                 for r_movie in recommended_movies[:6]: 
@@ -56,9 +62,12 @@ def result(request):
                 request.session['recommendations'] = recommended_movies.tolist()[0]
                 request.session.modified = True
             more_movies = Movie.objects.filter(genres__exact=results[0].genres).order_by('?')[:3]
-            paginator = Paginator(results, 6)
+            paginator = Paginator(results.order_by('?'), 6)
+            tv_paginator = Paginator(tv_results.order_by('?'), 6)
+            tv_page_number = request.GET.get('page')
             page_number = request.GET.get('page')
             paginated_movies = paginator.get_page(page_number)
+            paginated_shows = tv_paginator.get_page(tv_page_number)
             return render(request, 'movieuniverse/results.html', { 
                 "query" : search_query,
                 "movies" : paginated_movies,
@@ -67,11 +76,13 @@ def result(request):
                 "netflix" : netflix,
                 "hulu" : hulu,
                 "disney" : disney,
-                "prime" : prime
+                "prime" : prime,
+                "tv_shows" : paginated_shows,
             })
         else:
             return  render(request, 'movieuniverse/results.html', {
                 "query" : search_query,
+                "tv_shows" : tv_results,
             })
     else:
         return  render(request, 'movieuniverse/results.html', {
@@ -81,6 +92,10 @@ def result(request):
 def detail(request, movie_id):
     movie = get_object_or_404(Movie, pk=movie_id)
     return render(request, 'movieuniverse/detail.html', { 'movie': movie })
+
+def tv_detail(request, tv_show_id):
+    tv_show = get_object_or_404(TVShow, pk=tv_show_id)
+    return render(request, 'movieuniverse/detail.html', { 'movie': tv_show })
 
 def recommendation_detail(request, title):
     movie_id = Movie.objects.get(title__exact=title).id

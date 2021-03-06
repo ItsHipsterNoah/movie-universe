@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
 @import url("utilities.ceff6843e8e2.css");
 @import url("animations.e0b79d9ec17c.css");
-@import url("typography.9e2eedf4e3b0.css");
+@import url("typography.27f556d79913.css");
 
 
 *,
@@ -54,12 +54,24 @@ body {
     border: none;
 }
 
+::placeholder {
+    opacity: 0;
+    color:#fff;
+    transition: all 1s;
+}
+
+
 .search-box:focus {
     background-color: rgba(255, 255, 255, 0.5);
     border: 1px solid #fff;
     padding: 10px;
     outline: none;
     box-shadow: 0 0 1rem 0 rgba(0, 0, 0, .2); 
+}
+
+.search-box:focus::placeholder {
+    color:#fff;
+    opacity: 1;
 }
 
 .options {
@@ -131,13 +143,12 @@ body {
     color: #fff;
     cursor: pointer;
     outline: none;
+    transition: all 1s;
 }
 
 .search-btn:hover {
-    color: transparent;
     background-color: #fff;
-    background-clip: text;
-    -webkit-background-clip: text;
+    color: rgba(253,29,29,1);
 }
 
 /* Results styles */
@@ -151,6 +162,7 @@ body {
 .result-card {
     display: flex;
     justify-content: center;
+    flex-direction: column;
     margin: 10px;
     padding: 25px;
     border-radius: 5px;
@@ -241,6 +253,7 @@ body {
 
 .insights-heading {
     margin: 20px;
+    font-weight: 100;
 }
 
 .insights-img {
@@ -255,7 +268,17 @@ body {
 }
 
 
+.loading-wrapper {
+    height: 150vh;
+}
 
+/* Pagination styles */
+
+.pagination {
+    padding: 20px;
+    margin-bottom: 20px;
+    margin-right: 10px;
+}
 
 @media only screen and (max-width: 700px) {
     .recommendations-container {

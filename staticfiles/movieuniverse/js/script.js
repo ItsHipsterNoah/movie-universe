@@ -1,5 +1,7 @@
 let checkboxes = document.querySelectorAll('.checkbox');
 let searchBtn = document.querySelector('.search-btn');
+let wrapper = document.querySelector('.loading-wrapper');
+
 
 if (searchBtn) {
     searchBtn.addEventListener('click', function(e) {
@@ -22,4 +24,13 @@ const checkCheckBoxes = () => {
         return true;
     }
     return false;
+}
+
+const load = () => {
+    var node = document.createElement('h1');
+    node.classList.add('loading')
+    var textNode = document.createTextNode('Loading...');
+    node.appendChild(textNode);
+    wrapper.appendChild(node);
+    document.querySelector('.movie-form').style.display = "none";
 }

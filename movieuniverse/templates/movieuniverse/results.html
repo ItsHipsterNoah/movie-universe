@@ -18,21 +18,38 @@
     </div>
     <br>
     {% endfor %}
+    {% elif tv_shows %}
+        &nbsp;
     {% else %}
-    No results.
+        No matching movies.
     {% endif %}
 </div>
-<br>
+<div class="results-container">
+    {% if tv_shows %}
+    {% for tv_show in tv_shows %}
+    <div class="result-card">
+        <a href="{% url 'tv_detail' tv_show.id %}">
+            <h1 class="movie-title">{{ tv_show.title }}</h1>
+            <p class="movie-year">{{ tv_show.year }}</p>
+            <p class="move-genres">{{ tv_show.genres }}</p>
+        </a>
+    </div>
+    <br>
+    {% endfor %}
+    {% else %}
+    No matching shows.
+    {% endif %}
+</div>
 <div class="u-text-center">
     <div class="pagination">
         <span class="step-links">
-            {% if movies.has_previous %}
+            {% if tv_shows.has_previous %}
             <a class="step-link" href="?search={{query}}&netflix={{netflix}}&hulu={{hulu}}&disney={{disney}}&prime={{prime}}&page={{ movies.previous_page_number }}">previous</a>
             {% endif %}
             <span class="current">
-                {{ movies.number }}
+                {{ tv_shows.number }}
             </span>
-            {% if movies.has_next %}
+            {% if tv_shows.has_next %}
             <a class="step-link" href="?search={{query}}&netflix={{netflix}}&hulu={{hulu}}&disney={{disney}}&prime={{prime}}&page={{ movies.next_page_number }}">next</a>
             {% endif %}
         </span>
