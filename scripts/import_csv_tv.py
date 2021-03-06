@@ -17,7 +17,7 @@ with open('files/movies.csv') as f:
                 year = row[2],
                 age = row[3],
                 IMDb_rating = process_number(row[4]),
-                Rotten_Tomatoes_rating = int(process_number(row[5])),
+                Rotten_Tomatoes_rating = float(process_number(row[5])),
                 netflix = int(row[6]),
                 hulu = int(row[7]),
                 prime = int(row[8]),
