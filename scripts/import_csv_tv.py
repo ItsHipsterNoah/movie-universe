@@ -5,9 +5,9 @@ def process_number(integer):
     if integer == '':
         return 0.0
     elif '%' in integer:
-        return int(integer.replace('%', ''))
+        return float(integer.replace('%', ''))
     else:
-        return integer
+        return float(integer)
 
 with open('files/movies.csv') as f:
         reader = csv.reader(f)
