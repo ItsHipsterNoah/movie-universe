@@ -1,11 +1,11 @@
 import csv
 from movieuniverse.models import TVShow
 
-def process_number(integer) -> int:
+def process_number(integer):
     if integer == '':
         return 0.0
     elif '%' in integer:
-        return float(integer.replace('%', ''))
+        return int(integer.replace('%', ''))
     else:
         return integer
 
