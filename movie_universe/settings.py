@@ -25,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'x)ztd3_cq%p*-3aux77__$u8vs3ah*3u$9#3(egpitk)+(v7p%'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
     '.herokuapp.com',
@@ -77,7 +77,7 @@ WSGI_APPLICATION = 'movie_universe.wsgi.application'
 
 
 DATABASES = {
-    'default-1': {
+    'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': os.environ.get('DATABASE_NAME'),
         'USER': os.environ.get('DATABASE_USER'),
@@ -85,7 +85,7 @@ DATABASES = {
         'HOST': os.environ.get('DATABASE_HOST'),
         'PORT': '5432',
     },
-    'default': {
+    'test': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'mu-db-test',
         'USER': 'thomp',
